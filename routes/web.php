@@ -1,18 +1,12 @@
 <?php
 
+use App\Http\Controllers\Email\EmailConfigController;
+use App\Http\Controllers\Email\SendEmailController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[SendEmailController::class,'showSendMail'])->name('main');
+Route::get('/config',[EmailConfigController::class,'showEmailConfig'])->name('setting');
+Route::post('/config',[EmailConfigController::class,'setEmailConfig']);
+Route::post('/',[SendEmailController::class,'sendEmail']);
+
